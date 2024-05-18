@@ -1,4 +1,4 @@
-package org.example.detekt
+package com.makeappssimple.abhimanyu.detekt.rules
 
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.RuleSet

@@ -9,7 +9,11 @@ import io.gitlab.arturbosch.detekt.api.Rule
 import io.gitlab.arturbosch.detekt.api.Severity
 import org.jetbrains.kotlin.psi.KtClass
 
-class MyRule(config: Config) : Rule(config) {
+class MyRule(
+    config: Config,
+) : Rule(
+    ruleSetConfig = config,
+) {
     override val issue = Issue(
         id = javaClass.simpleName,
         severity = Severity.CodeSmell,

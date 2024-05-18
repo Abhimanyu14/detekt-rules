@@ -1,1 +1,1 @@
-com.makeappssimple.abhimanyu.detekt.rules.MyRuleSetProvider
+com.makeappssimple.abhimanyu.detekt.rules.provider.MasRuleSetProvider

@@ -1,4 +1,4 @@
-package com.makeappssimple.abhimanyu.detekt.rules
+package com.makeappssimple.abhimanyu.detekt.rules.rules
 
 import io.gitlab.arturbosch.detekt.api.CodeSmell
 import io.gitlab.arturbosch.detekt.api.Config
@@ -9,6 +9,11 @@ import io.gitlab.arturbosch.detekt.api.Rule
 import io.gitlab.arturbosch.detekt.api.Severity
 import org.jetbrains.kotlin.psi.KtClass
 
+private object MyRuleConstants {
+    const val ISSUE_DESCRIPTION = "Custom Rule"
+    const val ISSUE_MESSAGE = "Custom message"
+}
+
 class MyRule(
     config: Config,
 ) : Rule(
@@ -17,7 +22,7 @@ class MyRule(
     override val issue = Issue(
         id = javaClass.simpleName,
         severity = Severity.CodeSmell,
-        description = "Custom Rule",
+        description = MyRuleConstants.ISSUE_DESCRIPTION,
         debt = Debt.FIVE_MINS,
     )
 
@@ -29,9 +34,9 @@ class MyRule(
         if (klass.isInner()) {
             report(
                 finding = CodeSmell(
-                    issue = issue,
                     entity = Entity.atName(klass),
-                    message = "Custom message",
+                    issue = issue,
+                    message = MyRuleConstants.ISSUE_MESSAGE,
                 )
             )
         }

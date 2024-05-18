@@ -1,5 +1,6 @@
 package com.makeappssimple.abhimanyu.detekt.rules
 
+import com.makeappssimple.abhimanyu.detekt.rules.rules.MyRule
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.rules.KotlinCoreEnvironmentTest
 import io.gitlab.arturbosch.detekt.test.compileAndLintWithContext

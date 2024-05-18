@@ -8,7 +8,9 @@ import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.junit.jupiter.api.Test
 
 @KotlinCoreEnvironmentTest
-internal class MyRuleTest(private val env: KotlinCoreEnvironment) {
+internal class MyRuleTest(
+    private val env: KotlinCoreEnvironment,
+) {
 
     @Test
     fun `reports inner classes`() {

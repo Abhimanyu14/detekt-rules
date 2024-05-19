@@ -35,12 +35,12 @@ private object AvoidFunctionExpressionConstants {
  * }
  * </compliant>
  */
-class AvoidFunctionExpression(
+public class AvoidFunctionExpression(
     config: Config = Config.empty,
 ) : Rule(
     ruleSetConfig = config,
 ) {
-    override val issue = Issue(
+    override val issue: Issue = Issue(
         id = javaClass.simpleName,
         severity = Severity.CodeSmell,
         description = AvoidFunctionExpressionConstants.ISSUE_DESCRIPTION,

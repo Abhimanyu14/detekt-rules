@@ -14,12 +14,12 @@ private object InnerClassConstants {
     const val ISSUE_MESSAGE = "This is a test custom detekt rule"
 }
 
-class InnerClass(
+public class InnerClass(
     config: Config = Config.empty,
 ) : Rule(
     ruleSetConfig = config,
 ) {
-    override val issue = Issue(
+    override val issue: Issue = Issue(
         id = javaClass.simpleName,
         severity = Severity.CodeSmell,
         description = InnerClassConstants.ISSUE_DESCRIPTION,

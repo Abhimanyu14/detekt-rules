@@ -17,7 +17,7 @@ private object TooManyFunctionsConstants {
     const val DEFAULT_MAX_ALLOWED_NUMBER_OF_METHODS = 10
 }
 
-class TooManyFunctions(
+public class TooManyFunctions(
     config: Config,
 ) : Rule(
     ruleSetConfig = config,
@@ -27,7 +27,7 @@ class TooManyFunctions(
     )
     private var numberOfMethods: Int = 0
 
-    override val issue = Issue(
+    override val issue: Issue = Issue(
         id = javaClass.simpleName,
         severity = Severity.CodeSmell,
         description = TooManyFunctionsConstants.ISSUE_DESCRIPTION,

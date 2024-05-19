@@ -17,14 +17,14 @@ private object PublicApiOrderingConstants {
     """
 }
 
-class PublicApiOrdering(
+public class PublicApiOrdering(
     config: Config = Config.empty,
 ) : Rule(
     ruleSetConfig = config,
 ) {
     private var firstNonPublicMethod: String? = null
 
-    override val issue = Issue(
+    override val issue: Issue = Issue(
         id = javaClass.simpleName,
         severity = Severity.Style,
         description = PublicApiOrderingConstants.ISSUE_DESCRIPTION,

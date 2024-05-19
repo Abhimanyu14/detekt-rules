@@ -16,6 +16,7 @@ dependencies {
 
 kotlin {
     jvmToolchain(8)
+    explicitApi()
 }
 
 tasks.withType<Test>().configureEach {

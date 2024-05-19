@@ -20,7 +20,7 @@ private object UseTrailingCommaConstants {
     const val ISSUE_MESSAGE = "Trailing comma missing in a multiline list or function call."
 }
 
-class UseTrailingComma(
+public class UseTrailingComma(
     config: Config = Config.empty,
 ) : Rule(
     ruleSetConfig = config,

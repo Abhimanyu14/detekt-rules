@@ -15,7 +15,7 @@ private object UseNamedParametersConstants {
     const val ISSUE_MESSAGE = "Function call arguments should use named parameters."
 }
 
-class UseNamedParameters(
+public class UseNamedParameters(
     config: Config = Config.empty,
 ) : Rule(
     ruleSetConfig = config,

@@ -15,7 +15,7 @@ private object FunctionParametersInSeparateLineConstants {
     const val ISSUE_MESSAGE = "Each function parameter should be on a separate line."
 }
 
-class FunctionParametersInSeparateLine(
+public class FunctionParametersInSeparateLine(
     config: Config = Config.empty,
 ) : Rule(
     ruleSetConfig = config,

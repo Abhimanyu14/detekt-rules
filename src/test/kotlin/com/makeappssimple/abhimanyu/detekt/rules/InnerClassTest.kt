@@ -1,6 +1,6 @@
 package com.makeappssimple.abhimanyu.detekt.rules
 
-import com.makeappssimple.abhimanyu.detekt.rules.rules.MyRule
+import com.makeappssimple.abhimanyu.detekt.rules.rules.InnerClass
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.rules.KotlinCoreEnvironmentTest
 import io.gitlab.arturbosch.detekt.test.compileAndLintWithContext
@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.junit.jupiter.api.Test
 
 @KotlinCoreEnvironmentTest
-internal class MyRuleTest(
+internal class InnerClassTest(
     private val env: KotlinCoreEnvironment,
 ) {
 
@@ -20,7 +20,7 @@ internal class MyRuleTest(
           inner class B
         }
         """
-        val findings = MyRule(Config.empty).compileAndLintWithContext(env, code)
+        val findings = InnerClass(Config.empty).compileAndLintWithContext(env, code)
         findings shouldHaveSize 1
     }
 
@@ -31,7 +31,7 @@ internal class MyRuleTest(
           class B
         }
         """
-        val findings = MyRule(Config.empty).compileAndLintWithContext(env, code)
+        val findings = InnerClass(Config.empty).compileAndLintWithContext(env, code)
         findings shouldHaveSize 0
     }
 }

@@ -9,12 +9,12 @@ import io.gitlab.arturbosch.detekt.api.Rule
 import io.gitlab.arturbosch.detekt.api.Severity
 import org.jetbrains.kotlin.psi.KtClass
 
-private object MyRuleConstants {
-    const val ISSUE_DESCRIPTION = "Custom Rule"
-    const val ISSUE_MESSAGE = "Custom message"
+private object InnerClassConstants {
+    const val ISSUE_DESCRIPTION = "Inner classes are not allowed"
+    const val ISSUE_MESSAGE = "This is a test custom detekt rule"
 }
 
-class MyRule(
+class InnerClass(
     config: Config,
 ) : Rule(
     ruleSetConfig = config,
@@ -22,7 +22,7 @@ class MyRule(
     override val issue = Issue(
         id = javaClass.simpleName,
         severity = Severity.CodeSmell,
-        description = MyRuleConstants.ISSUE_DESCRIPTION,
+        description = InnerClassConstants.ISSUE_DESCRIPTION,
         debt = Debt.FIVE_MINS,
     )
 
@@ -34,9 +34,11 @@ class MyRule(
         if (klass.isInner()) {
             report(
                 finding = CodeSmell(
-                    entity = Entity.atName(klass),
+                    entity = Entity.atName(
+                        element = klass,
+                    ),
                     issue = issue,
-                    message = MyRuleConstants.ISSUE_MESSAGE,
+                    message = InnerClassConstants.ISSUE_MESSAGE,
                 )
             )
         }

@@ -1,7 +1,8 @@
 package com.makeappssimple.abhimanyu.detekt.rules.provider
 
-import com.makeappssimple.abhimanyu.detekt.rules.rules.MyRule
-import com.makeappssimple.abhimanyu.detekt.rules.rules.TooManyFunctionsRule
+import com.makeappssimple.abhimanyu.detekt.rules.rules.InnerClass
+import com.makeappssimple.abhimanyu.detekt.rules.rules.NoFunctionExpression
+import com.makeappssimple.abhimanyu.detekt.rules.rules.TooManyFunctions
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.RuleSet
 import io.gitlab.arturbosch.detekt.api.RuleSetProvider
@@ -15,10 +16,13 @@ class MasRuleSetProvider : RuleSetProvider {
         return RuleSet(
             id = ruleSetId,
             rules = listOf(
-                MyRule(
+                InnerClass(
                     config = config,
                 ),
-                TooManyFunctionsRule(
+                TooManyFunctions(
+                    config = config,
+                ),
+                NoFunctionExpression(
                     config = config,
                 ),
             ),

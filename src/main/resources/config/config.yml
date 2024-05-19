@@ -1,5 +1,7 @@
-MasRuleSet:
-  MyRule:
-    active: true
-  TooManyFunctionsRule:
+project-convention:
+  InnerClass:
+    active: false
+  TooManyFunctions:
+    active: false
+  NoFunctionExpression:
     active: true

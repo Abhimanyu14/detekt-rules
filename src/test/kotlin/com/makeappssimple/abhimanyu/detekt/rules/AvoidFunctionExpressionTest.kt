@@ -27,6 +27,84 @@ internal class AvoidFunctionExpressionTest(
 
         findings shouldHaveSize 1
     }
+    @Test
+    fun `reports function expression inside object`() {
+        val code = """
+        public object CoroutineDispatcherModule {
+            public fun providesDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
+        
+            public fun providesIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
+        
+            public fun providesMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
+        
+            public fun providesMainImmediateDispatcher(): CoroutineDispatcher {
+                return Dispatchers.Main.immediate
+            }
+        
+            public fun providesUnconfinedDispatcher(): CoroutineDispatcher {
+                return Dispatchers.Unconfined
+            }
+        }
+        """
+
+        val findings = AvoidFunctionExpression(
+            config = Config.empty,
+        ).compileAndLintWithContext(
+            environment = environment,
+            content = code,
+        )
+
+        findings shouldHaveSize 3
+    }
+
+    @Test
+    fun `reports function expression inside class`() {
+        val code = """
+        public class CoroutineDispatcherModule {
+            public fun providesDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
+        
+            public fun providesIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
+        
+            public fun providesMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
+        
+            public fun providesMainImmediateDispatcher(): CoroutineDispatcher {
+                return Dispatchers.Main.immediate
+            }
+        
+            public fun providesUnconfinedDispatcher(): CoroutineDispatcher {
+                return Dispatchers.Unconfined
+            }
+        }
+        """
+
+        val findings = AvoidFunctionExpression(
+            config = Config.empty,
+        ).compileAndLintWithContext(
+            environment = environment,
+            content = code,
+        )
+
+        findings shouldHaveSize 3
+    }
+
+    @Test
+    fun `reports function expression in extension method`() {
+        val code = """
+        public fun TransactionForEntity.asExternalModel(): TransactionFor = TransactionFor(
+            id = id,
+            title = title,
+        )
+        """
+
+        val findings = AvoidFunctionExpression(
+            config = Config.empty,
+        ).compileAndLintWithContext(
+            environment = environment,
+            content = code,
+        )
+
+        findings shouldHaveSize 1
+    }
 
     @Test
     fun `reports function expression without return type`() {

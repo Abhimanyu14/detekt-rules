@@ -7,8 +7,8 @@ import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.RuleSet
 import io.gitlab.arturbosch.detekt.api.RuleSetProvider
 
-class MasRuleSetProvider : RuleSetProvider {
-    override val ruleSetId: String = "MasRuleSet"
+class MyRuleSetProvider : RuleSetProvider {
+    override val ruleSetId: String = "project-convention"
 
     override fun instance(
         config: Config,

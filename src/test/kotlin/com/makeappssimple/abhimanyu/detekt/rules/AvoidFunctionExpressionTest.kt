@@ -1,7 +1,9 @@
 package com.makeappssimple.abhimanyu.detekt.rules
 
 import com.makeappssimple.abhimanyu.detekt.rules.rules.AvoidFunctionExpression
+import com.makeappssimple.abhimanyu.detekt.rules.rules.InnerClass
 import io.gitlab.arturbosch.detekt.api.Config
+import io.gitlab.arturbosch.detekt.api.Finding
 import io.gitlab.arturbosch.detekt.rules.KotlinCoreEnvironmentTest
 import io.gitlab.arturbosch.detekt.test.compileAndLintWithContext
 import io.kotest.matchers.collections.shouldHaveSize
@@ -18,15 +20,13 @@ internal class AvoidFunctionExpressionTest(
         fun test(): String = "test"
         """
 
-        val findings = AvoidFunctionExpression(
-            config = Config.empty,
-        ).compileAndLintWithContext(
-            environment = environment,
-            content = code,
+        val findings = getFindings(
+            code = code,
         )
 
         findings shouldHaveSize 1
     }
+
     @Test
     fun `reports function expression inside object`() {
         val code = """
@@ -47,11 +47,8 @@ internal class AvoidFunctionExpressionTest(
         }
         """
 
-        val findings = AvoidFunctionExpression(
-            config = Config.empty,
-        ).compileAndLintWithContext(
-            environment = environment,
-            content = code,
+        val findings = getFindings(
+            code = code,
         )
 
         findings shouldHaveSize 3
@@ -77,11 +74,8 @@ internal class AvoidFunctionExpressionTest(
         }
         """
 
-        val findings = AvoidFunctionExpression(
-            config = Config.empty,
-        ).compileAndLintWithContext(
-            environment = environment,
-            content = code,
+        val findings = getFindings(
+            code = code,
         )
 
         findings shouldHaveSize 3
@@ -96,11 +90,8 @@ internal class AvoidFunctionExpressionTest(
         )
         """
 
-        val findings = AvoidFunctionExpression(
-            config = Config.empty,
-        ).compileAndLintWithContext(
-            environment = environment,
-            content = code,
+        val findings = getFindings(
+            code = code,
         )
 
         findings shouldHaveSize 1
@@ -112,11 +103,8 @@ internal class AvoidFunctionExpressionTest(
         fun test() = "test"
         """
 
-        val findings = AvoidFunctionExpression(
-            config = Config.empty,
-        ).compileAndLintWithContext(
-            environment = environment,
-            content = code,
+        val findings = getFindings(
+            code = code,
         )
 
         findings shouldHaveSize 1
@@ -130,13 +118,19 @@ internal class AvoidFunctionExpressionTest(
         }
         """
 
-        val findings = AvoidFunctionExpression(
-            config = Config.empty,
-        ).compileAndLintWithContext(
-            environment = environment,
-            content = code,
+        val findings = getFindings(
+            code = code,
         )
 
         findings shouldHaveSize 0
+    }
+
+    private fun getFindings(
+        code: String,
+    ): List<Finding> {
+        return AvoidFunctionExpression().compileAndLintWithContext(
+            environment = environment,
+            content = code,
+        )
     }
 }

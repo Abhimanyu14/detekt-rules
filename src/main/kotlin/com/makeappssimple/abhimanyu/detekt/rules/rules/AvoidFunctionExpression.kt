@@ -36,7 +36,7 @@ private object AvoidFunctionExpressionConstants {
  * </compliant>
  */
 class AvoidFunctionExpression(
-    config: Config,
+    config: Config = Config.empty,
 ) : Rule(
     ruleSetConfig = config,
 ) {
@@ -51,13 +51,23 @@ class AvoidFunctionExpression(
         function: KtNamedFunction,
     ) {
         if (function.hasBody() && !function.hasBlockBody()) {
-            report(
-                finding = CodeSmell(
-                    issue = issue,
-                    entity = Entity.from(function),
-                    message = AvoidFunctionExpressionConstants.ISSUE_MESSAGE,
-                ),
+            reportIssue(
+                function = function,
             )
         }
+    }
+
+    private fun reportIssue(
+        function: KtNamedFunction,
+    ) {
+        report(
+            finding = CodeSmell(
+                issue = issue,
+                entity = Entity.from(
+                    element = function,
+                ),
+                message = AvoidFunctionExpressionConstants.ISSUE_MESSAGE,
+            ),
+        )
     }
 }

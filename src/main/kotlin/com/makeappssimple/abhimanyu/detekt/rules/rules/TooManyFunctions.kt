@@ -39,14 +39,8 @@ class TooManyFunctions(
     ) {
         super.visitKtFile(file)
         if (numberOfMethods > maxAllowedNumberOfMethods) {
-            report(
-                finding = CodeSmell(
-                    entity = Entity.from(
-                        element = file,
-                    ),
-                    issue = issue,
-                    message = TooManyFunctionsConstants.ISSUE_MESSAGE,
-                ),
+            reportIssue(
+                file = file,
             )
         }
         numberOfMethods = 0
@@ -57,5 +51,19 @@ class TooManyFunctions(
     ) {
         super.visitNamedFunction(function)
         numberOfMethods++
+    }
+
+    private fun reportIssue(
+        file: KtFile,
+    ) {
+        report(
+            finding = CodeSmell(
+                entity = Entity.from(
+                    element = file,
+                ),
+                issue = issue,
+                message = TooManyFunctionsConstants.ISSUE_MESSAGE,
+            ),
+        )
     }
 }

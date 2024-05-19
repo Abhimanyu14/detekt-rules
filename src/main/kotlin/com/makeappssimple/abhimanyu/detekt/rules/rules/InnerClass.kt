@@ -15,7 +15,7 @@ private object InnerClassConstants {
 }
 
 class InnerClass(
-    config: Config,
+    config: Config = Config.empty,
 ) : Rule(
     ruleSetConfig = config,
 ) {
@@ -32,15 +32,23 @@ class InnerClass(
         super.visitClass(klass)
 
         if (klass.isInner()) {
-            report(
-                finding = CodeSmell(
-                    entity = Entity.atName(
-                        element = klass,
-                    ),
-                    issue = issue,
-                    message = InnerClassConstants.ISSUE_MESSAGE,
-                )
+            reportIssue(
+                klass = klass,
             )
         }
+    }
+
+    private fun reportIssue(
+        klass: KtClass,
+    ) {
+        report(
+            finding = CodeSmell(
+                entity = Entity.atName(
+                    element = klass,
+                ),
+                issue = issue,
+                message = InnerClassConstants.ISSUE_MESSAGE,
+            )
+        )
     }
 }

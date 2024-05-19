@@ -1,9 +1,9 @@
 project-convention:
   AvoidFunctionExpression:
     active: true
-  EnforceNamedParameters:
+  UseNamedParameters:
+    active: true
+  PublicApiOrdering:
     active: true
   UseTrailingComma:
     active: false
-  PublicApiOrdering:
-    active: true

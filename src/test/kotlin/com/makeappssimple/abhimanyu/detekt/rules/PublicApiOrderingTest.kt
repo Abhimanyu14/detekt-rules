@@ -82,6 +82,33 @@ internal class PublicApiOrderingTest(
         findings shouldHaveSize 0
     }
 
+    @Test
+    fun `does not report when all public functions are declared before non public functions in nested anonymous object`() {
+        val code = """
+        public class AmountCommaVisualTransformation : VisualTransformation {
+            override fun filter(): TransformedText {
+                return TransformedText(
+                    offsetMapping = object : OffsetMapping {
+                        override fun originalToTransformed(
+                            offset: Int,
+                        ): Int { }
+        
+                        override fun transformedToOriginal(
+                            offset: Int,
+                        ): Int { }
+                    }
+                )
+            }
+        }
+        """
+
+        val findings = getFindings(
+            code = code,
+        )
+
+        findings shouldHaveSize 0
+    }
+
     private fun getFindings(
         code: String,
     ): List<Finding> {

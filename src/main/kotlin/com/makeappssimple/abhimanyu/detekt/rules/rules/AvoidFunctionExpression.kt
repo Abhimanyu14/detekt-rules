@@ -7,19 +7,9 @@ import io.gitlab.arturbosch.detekt.api.Entity
 import io.gitlab.arturbosch.detekt.api.Issue
 import io.gitlab.arturbosch.detekt.api.Rule
 import io.gitlab.arturbosch.detekt.api.Severity
-import io.gitlab.arturbosch.detekt.api.config
-import io.gitlab.arturbosch.detekt.api.internal.Configuration
-import org.jetbrains.kotlin.lexer.KtTokens
-import org.jetbrains.kotlin.psi.KtBinaryExpression
-import org.jetbrains.kotlin.psi.KtBlockExpression
-import org.jetbrains.kotlin.psi.KtDeclarationWithBody
-import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.psi.KtNamedFunction
-import org.jetbrains.kotlin.psi.KtProperty
-import org.jetbrains.kotlin.psi.KtReturnExpression
-import org.jetbrains.kotlin.psi.psiUtil.anyDescendantOfType
 
-private object ExpressionBodySyntaxConstants {
+private object AvoidFunctionExpressionConstants {
     const val ISSUE_DESCRIPTION = "Function expressions should be avoided."
     const val ISSUE_MESSAGE = "Function expressions should not be used."
 }
@@ -45,7 +35,7 @@ private object ExpressionBodySyntaxConstants {
  * }
  * </compliant>
  */
-class NoFunctionExpression(
+class AvoidFunctionExpression(
     config: Config,
 ) : Rule(
     ruleSetConfig = config,
@@ -53,19 +43,19 @@ class NoFunctionExpression(
     override val issue = Issue(
         id = javaClass.simpleName,
         severity = Severity.CodeSmell,
-        description = ExpressionBodySyntaxConstants.ISSUE_DESCRIPTION,
+        description = AvoidFunctionExpressionConstants.ISSUE_DESCRIPTION,
         debt = Debt.FIVE_MINS,
     )
 
     override fun visitNamedFunction(
         function: KtNamedFunction,
     ) {
-        if (function.isLocal) {
+        if (function.hasBody() && !function.hasBlockBody()) {
             report(
                 finding = CodeSmell(
                     issue = issue,
                     entity = Entity.from(function),
-                    message = ExpressionBodySyntaxConstants.ISSUE_MESSAGE,
+                    message = AvoidFunctionExpressionConstants.ISSUE_MESSAGE,
                 ),
             )
         }

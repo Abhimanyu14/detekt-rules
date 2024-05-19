@@ -1,7 +1,7 @@
 package com.makeappssimple.abhimanyu.detekt.rules.provider
 
 import com.makeappssimple.abhimanyu.detekt.rules.rules.InnerClass
-import com.makeappssimple.abhimanyu.detekt.rules.rules.NoFunctionExpression
+import com.makeappssimple.abhimanyu.detekt.rules.rules.AvoidFunctionExpression
 import com.makeappssimple.abhimanyu.detekt.rules.rules.TooManyFunctions
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.RuleSet
@@ -22,7 +22,7 @@ class MasRuleSetProvider : RuleSetProvider {
                 TooManyFunctions(
                     config = config,
                 ),
-                NoFunctionExpression(
+                AvoidFunctionExpression(
                     config = config,
                 ),
             ),

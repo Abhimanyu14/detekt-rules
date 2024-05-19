@@ -1,7 +1,3 @@
 project-convention:
-  InnerClass:
-    active: false
-  TooManyFunctions:
-    active: false
-  NoFunctionExpression:
+  AvoidFunctionExpression:
     active: true

@@ -29,6 +29,13 @@ publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
+
+            groupId = "com.github.Abhimanyu14"
+            artifactId = "detekt-rules"
+            version = "1.0.0"
         }
+    }
+    repositories {
+        mavenLocal()
     }
 }

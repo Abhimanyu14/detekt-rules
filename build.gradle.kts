@@ -3,9 +3,6 @@ plugins {
     `maven-publish`
 }
 
-group = "org.example.detekt"
-version = "1.0-SNAPSHOT"
-
 dependencies {
     compileOnly("io.gitlab.arturbosch.detekt:detekt-api:1.23.6")
 
@@ -29,6 +26,10 @@ publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
+
+            group = "com.github.Abhimanyu14"
+            artifactId = "detekt-rules"
+            version = "1.0.0"
         }
     }
 }
